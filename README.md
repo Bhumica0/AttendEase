@@ -64,3 +64,13 @@ The project excludes virtual environments, Python cache files, local database fi
 - Attendance Analytics
 - Student Dashboard
 - Teacher Dashboard
+## Subjects Supported
+
+- Signal Transformation
+- Data Science and Analytics
+- Machine Learning and Pattern Recognition
+- Version Control Using GitHub
+- Environment and Sustainability
+- Advanced Data Structures and Algorithms
+- Mathematics for Computing
+- Programming for Artificial Intelligence
