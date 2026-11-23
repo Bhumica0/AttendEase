@@ -42,3 +42,16 @@ AttendEase is a web-based attendance management system developed using Python, F
 ## Git Ignore
 
 The project excludes virtual environments, Python cache files, local database files and system-generated files from version control to keep the repository clean.
+## Installation and Setup
+
+1. Clone the repository
+2. Create a Python virtual environment
+3. Install dependencies using pip
+4. Run the Flask application
+
+### Commands
+
+- python3 -m venv venv
+- source venv/bin/activate
+- pip install -r requirements.txt
+- python3 app.py
