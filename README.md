@@ -19,3 +19,16 @@ AttendEase is a web-based attendance management system developed using Python, F
 - SQLite
 - HTML
 - CSS
+## System Roles
+
+### Teacher
+- Manage student records
+- Mark and update attendance
+- View subject-wise attendance
+- Access attendance reports and analytics
+
+### Student
+- View personal attendance records
+- Check attendance percentages
+- View attendance subject-wise
+- Track attendance history
