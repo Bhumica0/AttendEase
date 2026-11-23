@@ -55,3 +55,12 @@ The project excludes virtual environments, Python cache files, local database fi
 - source venv/bin/activate
 - pip install -r requirements.txt
 - python3 app.py
+## Core Modules
+
+- Student Management
+- Attendance Marking
+- Attendance Records
+- Subject Management
+- Attendance Analytics
+- Student Dashboard
+- Teacher Dashboard
