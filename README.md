@@ -39,3 +39,6 @@ AttendEase is a web-based attendance management system developed using Python, F
 - static/ — CSS styles and static assets
 - requirements.txt — Project dependencies
 - README.md — Project documentation
+## Git Ignore
+
+The project excludes virtual environments, Python cache files, local database files and system-generated files from version control to keep the repository clean.
