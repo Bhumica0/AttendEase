@@ -32,3 +32,10 @@ AttendEase is a web-based attendance management system developed using Python, F
 - Check attendance percentages
 - View attendance subject-wise
 - Track attendance history
+## Project Structure
+
+- app.py — Main Flask application
+- templates/ — HTML pages for the application
+- static/ — CSS styles and static assets
+- requirements.txt — Project dependencies
+- README.md — Project documentation
