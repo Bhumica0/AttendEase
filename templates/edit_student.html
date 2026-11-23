@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Student | AMS</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/students" class="active">Student Management</a>
+            <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+            <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+            <a href="{{ url_for('admin_profile') }}">Teacher Profile</a>
+            <a href="/settings">Settings</a>
+        </nav>
+
+        <a href="/logout" class="logout">Logout</a>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Edit Student</h1>
+                <p>Update the student's information.</p>
+            </div>
+
+            <div class="admin-profile">Teacher</div>
+        </header>
+
+        <section class="content-card">
+
+            <div class="section-heading">
+                <h2>Student Details</h2>
+                <p>Make the required changes below.</p>
+            </div>
+
+            <form method="POST"
+                  class="student-form">
+
+                <div class="student-form-grid">
+
+                    <div>
+                        <label>Roll Number</label>
+                        <input type="text"
+                               name="roll_number"
+                               value="{{ student.roll_number }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text"
+                               name="full_name"
+                               value="{{ student.full_name }}"
+                               required>
+                    </div>
+
+                    <div>
+                        <label>Email Address</label>
+                        <input type="email"
+                               name="email"
+                               value="{{ student.email or '' }}">
+                    </div>
+
+                    <div>
+                        <label>Course</label>
+                        <select name="course" required>
+                            <option value="MCA - Artificial Intelligence"
+                                {% if student.course == "MCA - Artificial Intelligence" %}selected{% endif %}>
+                                MCA - Artificial Intelligence
+                            </option>
+
+                            <option value="MCA - Data Science"
+                                {% if student.course == "MCA - Data Science" %}selected{% endif %}>
+                                MCA - Data Science
+                            </option>
+
+                            <option value="MCA - Cyber Security"
+                                {% if student.course == "MCA - Cyber Security" %}selected{% endif %}>
+                                MCA - Cyber Security
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Semester</label>
+                        <select name="semester" required>
+                            {% for i in range(1, 5) %}
+                            <option value="{{ i }}"
+                                {% if student.semester == i %}selected{% endif %}>
+                                Semester {{ i }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="add-student-btn">
+                    Save Changes
+                </button>
+
+                <a href="/students"
+                   style="margin-left: 15px; color: #30496e;">
+                    Cancel
+                </a>
+
+            </form>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

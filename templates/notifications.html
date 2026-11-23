@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendEase | Notifications</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fb;
+            color: #25283a;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            min-height: 100vh;
+            background: white;
+            border-right: 1px solid #e8e9f0;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: bold;
+            color: #6555d9;
+            margin-bottom: 35px;
+        }
+        .menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #a0a5b5;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav a {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 14px 15px;
+            border-radius: 12px;
+            color: #73798c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            z-index: 101;
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            background: #f4f2ff;
+            color: #6555d9;
+        }
+
+        .nav a.active {
+            background: #eeecff;
+            color: #6555d9;
+            font-weight: bold;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #e05d68 !important;
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 40px;
+        }
+
+        .heading {
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            color: #858a9c;
+            margin-bottom: 35px;
+        }
+
+        .notification-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #e8e9f0;
+            box-shadow: 0 5px 25px rgba(40,40,80,0.04);
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .notification-card.warning {
+            border-left: 5px solid #f0a34a;
+        }
+
+        .notification-card.info {
+            border-left: 5px solid #6555d9;
+        }
+
+        .notification-card.success {
+            border-left: 5px solid #54b58b;
+        }
+
+        .notification-icon {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            border-radius: 14px;
+            background: #f4f2ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+        }
+
+        .notification-content h3 {
+            margin: 3px 0 10px;
+            font-size: 18px;
+            color: #302b55;
+        }
+
+        .notification-content p {
+            color: #77738f;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .notification-content small {
+            display: block;
+            margin-top: 14px;
+            color: #a09aac;
+        }
+
+        .empty {
+            background: white;
+            padding: 60px 30px;
+            text-align: center;
+            border-radius: 18px;
+            border: 1px solid #e8e9f0;
+            box-shadow: 0 5px 25px rgba(40,40,80,0.04);
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+            color: #6555d9;
+        }
+
+        .empty h3 {
+            margin-bottom: 10px;
+            color: #302b55;
+        }
+
+        .empty p {
+            color: #88839a;
+        }
+
+        @media(max-width: 800px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+                min-height: auto;
+            }
+
+            .main {
+                padding: 25px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">AttendEase</div>
+        <p class="menu-label">WORKSPACE</p>
+        
+<nav class="nav">
+
+    <a href="{{ url_for('student_dashboard') }}" onclick="window.location.assign(this.href); return false;">
+        ◈ &nbsp; Overview
+    </a>
+
+    <a href="{{ url_for('my_attendance') }}" onclick="window.location.assign(this.href); return false;">
+        ▤ &nbsp; My Attendance
+    </a>
+
+    <a href="{{ url_for('attendance_calendar') }}" onclick="window.location.assign(this.href); return false;">
+        ▦ &nbsp; Attendance Calendar
+    </a>
+
+    <a href="{{ url_for('student_profile') }}" onclick="window.location.assign(this.href); return false;">
+        ◉ &nbsp; My Profile
+    </a>
+
+    <a href="{{ url_for('notifications') }}" class="active" onclick="window.location.assign(this.href); return false;">
+        ♧ &nbsp; Notifications
+    </a>
+    <a href="{{ url_for('student_settings') }}">
+    ⚙ &nbsp; Settings
+</a>
+</nav>
+
+
+        <a href="{{ url_for('logout') }}" class="nav logout">
+            ↪ &nbsp; Sign Out
+        </a>
+
+    </aside>
+
+    <main class="main">
+
+        <h1 class="heading">Notifications</h1>
+        <p class="subtitle">Stay updated with your attendance and important alerts.</p>
+
+        {% if records %}
+
+            {% for record in records %}
+
+                <div class="notification-card {{ record['notification_type'] }}">
+
+                    <div class="notification-icon">
+                        {% if record['notification_type'] == 'warning' %}
+                            ⚠️
+                        {% elif record['notification_type'] == 'success' %}
+                            ✓
+                        {% else %}
+                            ♧
+                        {% endif %}
+                    </div>
+
+                    <div class="notification-content">
+                        <h3>{{ record['title'] }}</h3>
+                        <p>{{ record['message'] }}</p>
+                        <small>{{ record['created_at'] }}</small>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                <div class="empty-icon">♧</div>
+                <h3>You're all caught up!</h3>
+                <p>There are no notifications to display right now.</p>
+            </div>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Records | AMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('students') }}">Student Management</a>
+    <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+    <a href="{{ url_for('attendance_records') }}" class="active">Attendance Records</a>
+    <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+    <a href="{{ url_for('admin_profile') }}">Teacher Profile</a>
+    <a href="{{ url_for('settings') }}">Settings</a>
+</nav>
+
+<a href="{{ url_for('logout') }}" class="logout">Logout</a>
+</aside>
+
+    <main class="main-content">
+
+        <h1>Attendance Records</h1>
+        <p>View all previously saved student attendance records.</p>
+
+        <div class="content-card">
+            <h2>All Attendance Records</h2>
+
+<form action="{{ url_for('attendance_records') }}" method="GET"
+      style="margin: 20px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+
+    <label for="filter_date">Select Attendance Date:</label>
+
+    <input
+        type="date"
+        id="filter_date"
+        name="date"
+        value="{{ selected_date }}"
+        style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;"
+    >
+
+    <button type="submit" class="add-student-btn">
+        Filter Records
+    </button>
+
+    <a href="{{ url_for('attendance_records') }}"
+       style="text-decoration: none; color: #172b4d;">
+        Show All
+    </a>
+
+</form>
+
+
+            <div class="table-container">
+                <table class="student-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Roll Number</th>
+                            <th>Student Name</th>
+                            <th>Attendance Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for record in records %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ record.roll_number }}</td>
+                            <td>{{ record.full_name }}</td>
+                            <td>{{ record.attendance_date }}</td>
+                            <td>
+                                <span class="status-btn {{ record.status|lower }}">
+                                    {{ record.status }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No attendance records found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendEase | My Profile</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fb;
+            color: #25283a;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            min-height: 100vh;
+            background: white;
+            border-right: 1px solid #e8e9f0;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: bold;
+            color: #6555d9;
+            margin-bottom: 35px;
+        }
+        .menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #a0a5b5;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav a {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 14px 15px;
+            border-radius: 12px;
+            color: #73798c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            z-index: 101;
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            background: #f4f2ff;
+            color: #6555d9;
+        }
+
+        .nav a.active {
+            background: #eeecff;
+            color: #6555d9;
+            font-weight: bold;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #e05d68 !important;
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            padding: 40px;
+        }
+
+        .heading {
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            color: #858a9c;
+            margin-bottom: 35px;
+        }
+
+        .profile-banner {
+            background: linear-gradient(135deg, #eeecff, #f8f6ff);
+            border-radius: 20px;
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 28px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
+            border-radius: 50%;
+            background: #6555d9;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            font-weight: bold;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(101,85,217,0.15);
+        }
+
+        .profile-banner h2 {
+            margin: 0 0 10px;
+            font-size: 26px;
+            color: #302b55;
+        }
+
+        .profile-banner p {
+            margin: 5px 0;
+            color: #77738f;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 12px;
+            background: white;
+            color: #6555d9;
+            padding: 8px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(40,40,80,0.04);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .detail {
+            background: #fafaff;
+            border: 1px solid #f0eff8;
+            padding: 20px;
+            border-radius: 14px;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #858a9c;
+            margin-bottom: 9px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #34364a;
+            word-break: break-word;
+        }
+
+        @media(max-width: 800px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+                min-height: auto;
+            }
+
+            .main {
+                padding: 25px 18px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-banner {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">AttendEase</div>
+        <p class="menu-label">WORKSPACE</p>
+        <nav class="nav">
+
+    <a href="{{ url_for('student_dashboard') }}">
+        ◈ &nbsp; Overview
+    </a>
+
+    <a href="{{ url_for('my_attendance') }}" onclick="window.location.assign(this.href); return false;">
+        ▤ &nbsp; My Attendance
+    </a>
+
+    <a href="{{ url_for('attendance_calendar') }}" onclick="window.location.assign(this.href); return false;">
+        ▦ &nbsp; Attendance Calendar
+    </a>
+
+    <a href="{{ url_for('student_profile') }}" class="active" onclick="window.location.assign(this.href); return false;">
+        ◉ &nbsp; My Profile
+    </a>
+
+    <a href="{{ url_for('notifications') }}" onclick="window.location.assign(this.href); return false;">
+        ♧ &nbsp; Notifications
+    </a>
+    <a href="{{ url_for('student_settings') }}">
+    ⚙ &nbsp; Settings
+</a>
+</nav>
+
+        <a href="{{ url_for('logout') }}" class="nav logout">
+            ↪ &nbsp; Sign Out
+        </a>
+
+    </aside>
+
+    <main class="main">
+
+        <h1 class="heading">My Profile</h1>
+        <p class="subtitle">View your personal and academic information.</p>
+
+        <section class="profile-banner">
+
+            <div class="avatar">
+                {{ student['full_name'][0]|upper if student and student['full_name'] else 'S' }}
+            </div>
+
+            <div>
+                <h2>{{ student['full_name'] if student else 'Student' }}</h2>
+
+                <p>Student account</p>
+
+                <span class="badge">✦ &nbsp; Enrolled Student</span>
+            </div>
+
+        </section>
+
+        <section class="card">
+
+            <h3>Personal Information</h3>
+
+            <div class="details-grid">
+
+                <div class="detail">
+                    <div class="detail-label">Full Name</div>
+                    <div class="detail-value">
+                        {{ student['full_name'] if student else 'Not available' }}
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="detail-label">Roll Number</div>
+                    <div class="detail-value">
+                        {{ student['roll_number'] if student else 'Not available' }}
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="detail-label">Email Address</div>
+                    <div class="detail-value">
+                        {{ student['email'] if student else 'Not available' }}
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="detail-label">Course</div>
+                    <div class="detail-value">
+                        {{ student['course'] if student else 'Not available' }}
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="detail-label">Semester</div>
+                    <div class="detail-value">
+                        {{ student['semester'] if student else 'Not available' }}
+                    </div>
+                </div>
+
+                <div class="detail">
+                    <div class="detail-label">Account Created</div>
+                    <div class="detail-value">
+                        {{ student['created_at'] if student and student['created_at'] else 'Not available' }}
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

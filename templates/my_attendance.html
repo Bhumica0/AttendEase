@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendEase | My Attendance</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f6fb;
+            color: #25283a;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            min-height: 100vh;
+            background: white;
+            border-right: 1px solid #e8e9f0;
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: bold;
+            color: #6555d9;
+            margin-bottom: 35px;
+        }
+        .menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #a0a5b5;
+    letter-spacing: 1.5px;
+    margin-bottom: 15px;
+}
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav a {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 14px 15px;
+            border-radius: 12px;
+            color: #73798c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            z-index: 101;
+            cursor: pointer;
+        }
+
+        .nav a:hover {
+            background: #f4f2ff;
+            color: #6555d9;
+        }
+
+        .nav a.active {
+            background: #eeecff;
+            color: #6555d9;
+            font-weight: bold;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #e05d68 !important;
+        }
+
+        .main {
+    flex: 1;
+    min-width: 0;
+    padding: 40px;
+    width: calc(100% - 250px);
+}
+
+        .heading {
+            font-size: 28px;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            color: #858a9c;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 5px 25px rgba(40, 40, 80, 0.04);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #eeeef4;
+        }
+
+        th {
+            color: #858a9c;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .present {
+            background: #e5f8ed;
+            color: #219653;
+        }
+
+        .absent {
+            background: #ffe9e9;
+            color: #d64545;
+        }
+
+        .late {
+            background: #fff4df;
+            color: #b7791f;
+        }
+
+        @media(max-width: 800px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+                min-height: auto;
+            }
+
+            .main {
+                padding: 25px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+    <div class="brand">
+        Attend<span>Ease</span>
+    </div>
+
+    <p class="menu-label">WORKSPACE</p>
+
+    <nav class="nav">
+
+    <a href="{{ url_for('student_dashboard') }}">
+        ◈ &nbsp; Overview
+    </a>
+
+    <a href="{{ url_for('my_attendance') }}" class="active" onclick="window.location.assign(this.href); return false;">
+        ▤ &nbsp; My Attendance
+    </a>
+
+    <a href="{{ url_for('attendance_calendar') }}" onclick="window.location.assign(this.href); return false;">
+        ▦ &nbsp; Attendance Calendar
+    </a>
+
+    <a href="{{ url_for('student_profile') }}" onclick="window.location.assign(this.href); return false;">
+        ◉ &nbsp; My Profile
+    </a>
+
+    <a href="{{ url_for('notifications') }}" onclick="window.location.assign(this.href); return false;">
+        ♧ &nbsp; Notifications
+    </a>
+    <a href="{{ url_for('student_settings') }}">
+    ⚙ &nbsp; Settings
+</a>
+</nav>
+
+        <a href="{{ url_for('logout') }}" class="nav logout">
+            ↪ &nbsp; Sign Out
+        </a>
+
+    </aside>
+
+    <main class="main">
+
+        <h1 class="heading">My Attendance</h1>
+        <p class="subtitle">View your personal attendance history.</p>
+
+        <div class="card">
+
+            <h2>Attendance History</h2>
+
+            {% if records %}
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for record in records %}
+                    <tr>
+                        <td>{{ record['attendance_date'] }}</td>
+
+                        <td>
+                            {% if record['status'] == 'Present' %}
+                                <span class="status present">Present</span>
+                            {% elif record['status'] == 'Absent' %}
+                                <span class="status absent">Absent</span>
+                            {% elif record['status'] == 'Late' %}
+                                <span class="status late">Late</span>
+                            {% else %}
+                                {{ record['status'] }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+
+            <p style="color:#858a9c;">No attendance records found yet.</p>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

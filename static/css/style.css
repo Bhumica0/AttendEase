@@ -1,0 +1,154 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+
+    background-image:
+        linear-gradient(rgba(10, 25, 45, 0.25),
+                        rgba(10, 25, 45, 0.25)),
+        url("../images/campus.jpg");
+
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: #142b4a;
+}
+
+.login-container {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 390px;
+
+    background: #ffffff;
+    padding: 38px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+
+    text-align: center;
+}
+
+.logo {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 18px;
+
+    background: #142b4a;
+    color: white;
+
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.portal-name {
+    color: #a52140;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.login-card h1 {
+    color: #142b4a;
+    font-family: Georgia, serif;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #788394;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #34445c;
+    margin-bottom: 9px;
+}
+
+.form-group input {
+    width: 100%;
+    height: 48px;
+    padding: 0 13px;
+    border: 1px solid #dce1e9;
+    border-radius: 6px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #a52140;
+}
+
+.remember {
+    text-align: left;
+    margin-bottom: 23px;
+    font-size: 12px;
+    color: #788394;
+}
+
+.remember input {
+    accent-color: #142b4a;
+    margin-right: 5px;
+}
+
+button {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    background: #142b4a;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #a52140;
+}
+
+.divider {
+    height: 1px;
+    background: #edf0f4;
+    margin: 25px 0 16px;
+}
+
+.footer-text {
+    color: #929baa;
+    font-size: 11px;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 28px 23px;
+    }
+}

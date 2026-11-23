@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Teacher Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_profile.css') }}">
+</head>
+
+<body class="admin-profile-page">
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('students') }}">Student Management</a>
+            <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+            <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+            <a href="{{ url_for('admin_profile') }}" class="active">Teacher Profile</a>
+
+            <button type="button"
+                    class="sidebar-link-button"
+                    onclick="window.location.href='/settings'">
+                Settings
+            </button>
+        </nav>
+
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+    </aside>
+
+    <main class="main-content">
+
+        <div class="profile-heading">
+            <h1>Edit Teacher Profile</h1>
+            <p>Update your teacher information.</p>
+        </div>
+
+        <div class="profile-card">
+
+            <h2>Edit Teacher Information</h2>
+
+            <form action="{{ url_for('edit_profile') }}" method="POST">
+
+                <div class="profile-item">
+                    <label>Username</label>
+
+                    <input type="text"
+                           name="username"
+                           value="{{ admin['username'] }}"
+                           required>
+                </div>
+
+                <br>
+
+                <div class="profile-item">
+                    <label>Teacher Name</label>
+
+                    <input type="text"
+                           name="full_name"
+                           value="{{ admin['full_name'] }}"
+                           required>
+                </div>
+
+                <br>
+
+                <button type="submit" class="settings-button">
+                    Save Changes
+                </button>
+
+                <a href="{{ url_for('admin_profile') }}">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

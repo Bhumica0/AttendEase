@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Profile | Attendance Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_profile.css') }}">
+</head>
+
+<body class="admin-profile-page">
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('students') }}">Student Management</a>
+            <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+            <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+            <a href="{{ url_for('admin_profile') }}" class="active">Teacher Profile</a>
+
+            <button type="button"
+                    class="sidebar-link-button"
+                    onclick="window.location.href='/settings'">
+                Settings
+            </button>
+        </nav>
+
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <div class="profile-heading">
+            <h1>Teacher Profile</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="success-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <p>Manage your teacher account information.</p>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="profile-card-heading">
+                <div>
+                    <h2>Teacher Information</h2>
+                    <p>Your account details and access information</p>
+                </div>
+
+                <div class="profile-icon">T</div>
+            </div>
+
+            <div class="profile-actions">
+                <a href="{{ url_for('edit_profile') }}" class="settings-button">
+                    Edit Profile
+                </a>
+            </div>
+
+            <div class="profile-details">
+
+                <div class="profile-item">
+                    <label>Teacher Name</label>
+                    <p>{{ admin["full_name"] }}</p>
+                </div>
+
+                <div class="profile-item">
+                    <label>Username</label>
+                    <p>{{ admin["username"] }}</p>
+                </div>
+
+                <div class="profile-item">
+                    <label>Account Type</label>
+                    <p>Teacher</p>
+                </div>
+
+                <div class="profile-item">
+                    <label>Account Status</label>
+                    <p><span class="status-active">Active</span></p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+
+/* REPORTS PAGE - PROFESSIONAL DESIGN */
+
+body.reports-page {
+    background: #f4f6fa !important;
+    background-image: none !important;
+    color: #263247;
+}
+
+/* MAIN CONTENT */
+
+.reports-page .main-content {
+    background: #f4f6fa !important;
+    padding: 35px 40px;
+}
+
+/* PAGE HEADING */
+
+.reports-page .main-content h1 {
+    color: #172b4d;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.reports-page .main-content > p {
+    color: #718096;
+    font-size: 15px;
+    margin-bottom: 28px;
+}
+
+/* STATISTICS CARDS */
+
+.reports-page .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 30px;
+}
+
+.reports-page .stat-card {
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(23, 43, 77, 0.06);
+}
+
+.reports-page .stat-card p {
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.reports-page .stat-card h2 {
+    color: #172b4d;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.reports-page .stat-card span {
+    color: #8793a5;
+    font-size: 13px;
+}
+
+/* REPORT TABLE CONTAINER */
+
+.reports-page .table-container {
+    background: #ffffff !important;
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: 0 3px 12px rgba(23, 43, 77, 0.06);
+    overflow-x: auto;
+}
+
+/* TABLE HEADING */
+
+.reports-page .table-container h2 {
+    color: #172b4d;
+    font-size: 21px;
+    margin-bottom: 22px;
+}
+
+/* TABLE */
+
+.reports-page .student-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+.reports-page .student-table th {
+    background: #edf2f8;
+    color: #344767;
+    padding: 16px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.reports-page .student-table td {
+    background: #ffffff;
+    color: #526176;
+    padding: 16px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #e9edf3;
+}
+
+.reports-page .student-table tr:hover td {
+    background: #f7f9fc;
+}
+
+.reports-page .student-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .reports-page .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reports-page .main-content {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .reports-page .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ATTENDANCE ANALYTICS CHARTS */
+
+.reports-page .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.reports-page .chart-card {
+    background: #ffffff;
+    border: 1px solid #e5eaf1;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 12px rgba(23, 43, 77, 0.06);
+    min-width: 0;
+}
+
+.reports-page .chart-card h2 {
+    color: #172b4d;
+    font-size: 19px;
+    margin-bottom: 22px;
+}
+
+.reports-page .chart-card canvas {
+    width: 100% !important;
+    max-height: 300px;
+}
+
+@media (max-width: 800px) {
+    .reports-page .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.sidebar-link-button {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #dce3ed;
+    padding: 14px 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar-link-button:hover {
+    background: #29466f;
+    color: white;
+}

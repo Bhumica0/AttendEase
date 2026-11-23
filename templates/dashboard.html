@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard | Attendance Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <div style="position:relative; z-index:999999; pointer-events:auto;">
+
+        </div>
+    
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+                <h2>AMS</h2>
+                <p>Attendance Portal</p>
+            </div>
+
+            <nav>
+    <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+    <a href="{{ url_for('students') }}">Student Management</a>
+    <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+    <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+    <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+    <a href="{{ url_for('admin_profile') }}">Teacher Profile</a>
+    
+<form action="/settings" method="GET" style="margin:0;">
+    <button type="submit"
+            style="display:block; width:100%; padding:14px 15px;
+                   cursor:pointer; background:transparent;
+                   border:none; color:#dce3ed;
+                   text-align:left; font-size:14px;
+                   border-radius:7px; font-family:Arial,sans-serif;">
+        Settings
+    </button>
+</form>
+
+</nav>
+            <a href="/logout" class="logout">Logout</a>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+        
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome to your attendance management system.</p>
+                </div>
+
+                <div class="admin-profile">
+    {{ admin_name }}
+</div>
+            </header>
+
+
+            
+<!-- STATISTICS -->
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <p>Total Students</p>
+        <h2>{{ total_students }}</h2>
+        <span>Registered students</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Present Today</p>
+        <h2>{{ present_today }}</h2>
+        <span>Students present</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Absent Today</p>
+        <h2>{{ absent_today }}</h2>
+        <span>Students absent</span>
+    </div>
+
+    <div class="stat-card">
+        <p>Attendance Rate</p>
+        <h2>{{ attendance_rate }}%</h2>
+        <span>Today's attendance</span>
+    </div>
+
+</section>
+
+
+
+            <!-- RECENT ACTIVITY -->
+
+            <section class="content-card">
+
+                <div class="section-heading">
+                    <h2>Recent Attendance Records</h2>
+                    <p>Latest attendance activity will appear here.</p>
+                </div>
+
+                
+<div class="table-container">
+    <table class="student-table">
+        <thead>
+            <tr>
+                <th>Roll Number</th>
+                <th>Student Name</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for record in recent_records %}
+            <tr>
+                <td>{{ record.roll_number }}</td>
+                <td>{{ record.full_name }}</td>
+                <td>{{ record.attendance_date }}</td>
+                <td>
+                    <span class="status-btn {{ record.status|lower }}">
+                        {{ record.status }}
+                    </span>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No attendance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+            </section>
+            
+
+        </main>
+
+    </div>
+
+</body>
+</html>

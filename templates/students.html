@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management | AMS</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/students" class="active">Student Management</a>
+    <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+    <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+    <a href="{{ url_for('reports') }}">Reports</a>
+    <a href="{{ url_for('admin_profile') }}">Teacher Profile</a>
+    <a href="/teacher_settings">Settings</a>
+</nav>
+
+        <a href="/logout" class="logout">Logout</a>
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Student Management</h1>
+                <p>Register and manage student information.</p>
+            </div>
+
+            <div class="admin-profile">Teacher</div>
+        </header>
+
+
+        <!-- ADD STUDENT FORM -->
+
+        <section class="content-card">
+
+            <div class="section-heading">
+                <h2>Add New Student</h2>
+                <p>Enter the student's details below.</p>
+            </div>
+
+            <form action="/add_student" method="POST"
+                  class="student-form">
+
+                <div class="student-form-grid">
+
+                    <div>
+                        <label>Roll Number</label>
+                        <input type="text" name="roll_number"
+                               placeholder="Enter roll number" required>
+                    </div>
+
+                    <div>
+                        <label>Full Name</label>
+                        <input type="text" name="full_name"
+                               placeholder="Enter full name" required>
+                    </div>
+
+                    <div>
+                        <label>Email Address</label>
+                        <input type="email" name="email"
+                               placeholder="Enter email address">
+                    </div>
+
+                    <div>
+                        <label>Course</label>
+                        <select name="course" required>
+                            <option value="">Select course</option>
+                            <option value="MCA - Artificial Intelligence">
+                                MCA - Artificial Intelligence
+                            </option>
+                            <option value="MCA - Data Science">
+                                MCA - Data Science
+                            </option>
+                            <option value="MCA - Cyber Security">
+                                MCA - Cyber Security
+                            </option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Semester</label>
+                        <select name="semester" required>
+                            <option value="">Select semester</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                        </select>
+                    </div>
+                    <div>
+    <label>Student Password</label>
+    <input type="password"
+           name="password"
+           placeholder="Create student password"
+           required
+           minlength="6">
+</div>
+
+                </div>
+
+                <button type="submit" class="add-student-btn">
+                    Register Student
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- REGISTERED STUDENTS -->
+
+        <section class="content-card" style="margin-top: 25px;">
+
+            <div class="section-heading">
+                <h2>Registered Students</h2>
+                <p>All students stored in the database.</p>
+                <div class="search-box">
+    <input
+        type="text"
+        id="studentSearch"
+        placeholder="Search by name or roll number..."
+    >
+</div>
+            </div>
+
+            <div class="table-container">
+
+                
+<table class="student-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Roll Number</th>
+            <th>Student Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Semester</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>{{ student.full_name }}</td>
+            <td>{{ student.email or '-' }}</td>
+            <td>{{ student.course or '-' }}</td>
+            <td>{{ student.semester or '-' }}</td>
+            <td class="student-actions">
+                <a href="{{ url_for('edit_student', student_id=student.student_id) }}">
+                    Edit
+                </a>
+
+                <a href="{{ url_for('delete_student', student_id=student.student_id) }}"
+                   onclick="return confirm('Are you sure you want to delete this student?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">No students registered yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+<script>
+    const searchInput = document.getElementById("studentSearch");
+
+    searchInput.addEventListener("keyup", function () {
+        const searchValue = searchInput.value.toLowerCase();
+
+        const rows = document.querySelectorAll(".student-table tbody tr");
+
+        rows.forEach(function (row) {
+            const rowText = row.innerText.toLowerCase();
+
+            if (rowText.includes(searchValue)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+</body>
+</html>

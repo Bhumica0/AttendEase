@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Attendance Management</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/settings.css') }}">
+</head>
+
+<body class="settings-page">
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('students') }}">Student Management</a>
+            <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+            <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+
+            <button type="button"
+                    class="sidebar-link-button"
+                    onclick="window.location.href='/admin_profile'">
+                Teacher Profile
+            </button>
+
+            <button type="button"
+                    class="sidebar-link-button active"
+                    onclick="window.location.href='/settings'">
+                Settings
+            </button>
+        </nav>
+
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <div class="settings-heading">
+            <h1>Settings</h1>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="success-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <p>Manage your attendance management system preferences.</p>
+        </div>
+
+        <!-- ACCOUNT SETTINGS -->
+
+        <section class="settings-card">
+
+            <h2>Account Settings</h2>
+
+            <p class="settings-description">
+                Teacher account information
+            </p>
+
+            <div class="settings-item">
+                <div>
+                    <h3>Teacher Account</h3>
+                    <p>Manage your teacher profile information.</p>
+                </div>
+
+                <a href="{{ url_for('admin_profile') }}" class="settings-button">
+                    View Profile
+                </a>
+            </div>
+
+        </section>
+
+        <!-- PASSWORD SETTINGS -->
+
+        <section class="settings-card">
+
+            <h2>Security Settings</h2>
+
+            <p class="settings-description">
+                Keep your teacher account secure.
+            </p>
+
+            <form action="{{ url_for('change_password') }}" method="POST">
+
+                <div class="password-field">
+                    <label>Current Password</label>
+                    <input type="password" name="current_password" required>
+                </div>
+
+                <div class="password-field">
+                    <label>New Password</label>
+                    <input type="password" name="new_password" minlength="8" required>
+                </div>
+
+                <div class="password-field">
+                    <label>Confirm New Password</label>
+                    <input type="password" name="confirm_password" minlength="8" required>
+                </div>
+
+                <button type="submit" class="settings-button">
+                    Update Password
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- NOTIFICATION SETTINGS -->
+
+        <section class="settings-card">
+
+            <h2>Notification Preferences</h2>
+
+            <p class="settings-description">
+                Attendance system notification preferences.
+            </p>
+
+            <form action="{{ url_for('update_notifications') }}" method="POST">
+
+                <div class="settings-item">
+                    <div>
+                        <h3>Attendance Notifications</h3>
+                        <p>Enable or disable attendance update notifications.</p>
+                    </div>
+
+                    <label class="notification-toggle">
+                        <input type="checkbox"
+                               name="notifications"
+                               value="on"
+                               {% if notifications_enabled == 1 %}checked{% endif %}>
+                        <span>Enable Notifications</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="settings-button">
+                    Save Preferences
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- SYSTEM INFORMATION -->
+
+        <section class="settings-card">
+
+            <h2>System Information</h2>
+
+            <p class="settings-description">
+                Basic information about the application.
+            </p>
+
+            <div class="system-info">
+                <div>
+                    <span>Application</span>
+                    <strong>Attendance Management System</strong>
+                </div>
+
+                <div>
+                    <span>Version</span>
+                    <strong>1.0</strong>
+                </div>
+
+                <div>
+                    <span>Account Type</span>
+                    <strong>Teacher</strong>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+```

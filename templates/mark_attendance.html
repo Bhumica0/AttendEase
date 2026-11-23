@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance | AMS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>AMS</h2>
+                <p>Attendance Portal</p>
+            </div>
+
+            <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('students') }}">Student Management</a>
+    <a href="{{ url_for('mark_attendance') }}" class="active">Mark Attendance</a>
+    <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+    <a href="{{ url_for('reports') }}">Reports & Analytics</a>
+   <a href="{{ url_for('admin_profile') }}">Teacher Profile</a>
+    <a href="{{ url_for('settings') }}">Settings</a>
+</nav>
+
+<a href="{{ url_for('logout') }}" class="logout">Logout</a>
+</aside>
+
+        <main class="main-content">
+
+            
+<div class="content-card">
+   <form action="/save_attendance" method="POST">
+    <h2>Daily Attendance</h2>
+    <div style="margin-bottom: 20px;">
+    <label for="subject_id" style="font-weight: 600;">Select Subject:</label>
+
+    <select name="subject_id" id="subject_id" required
+            style="padding: 10px; width: 100%; max-width: 400px; margin-top: 8px; border-radius: 8px;">
+        <option value="">-- Choose Subject --</option>
+
+        {% for subject in subjects %}
+            <option value="{{ subject.subject_id }}"
+    {% if selected_subject_id|string == subject.subject_id|string %}selected{% endif %}>
+    {{ subject.subject_name }}
+</option>
+        {% endfor %}
+    </select>
+</div>
+
+    <div style="margin: 20px 0;">
+    <label for="attendance_date">Select Date:</label>
+    <input type="date" id="attendance_date" name="attendance_date" value="{{ selected_date }}" required>
+</div>
+
+<script>
+    const dateInput = document.getElementById("attendance_date");
+    if (!dateInput.value) {
+        dateInput.value = new Date().toISOString().split("T")[0];
+    }
+</script>
+
+<button type="submit" class="add-student-btn">
+    Save Attendance
+</button>
+    </div>
+    
+
+    <div class="table-container">
+        <table class="student-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Roll Number</th>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                    <th>Attendance Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ student.roll_number }}</td>
+                    <td>{{ student.full_name }}</td>
+                    <td>{{ student.course }}</td>
+                    <td>
+                       <div class="attendance-options">
+
+    <label class="status-btn present">
+        <input type="radio"
+               name="status_{{ student.student_id }}"
+               value="Present" checked>
+        Present
+    </label>
+
+    <label class="status-btn absent">
+        <input type="radio"
+               name="status_{{ student.student_id }}"
+               value="Absent">
+        Absent
+    </label>
+
+    <label class="status-btn late">
+        <input type="radio"
+               name="status_{{ student.student_id }}"
+               value="Late">
+        Late
+    </label>
+
+</div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No students registered yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+   </form>
+</div>
+
+
+        </main>
+
+    </div>
+
+</body>
+</html>

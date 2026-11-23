@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports & Analytics</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+</head>
+
+<body class="reports-page">
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <h2>AMS</h2>
+            <p>Attendance Portal</p>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('students') }}">Student Management</a>
+            <a href="{{ url_for('mark_attendance') }}">Mark Attendance</a>
+            <a href="{{ url_for('attendance_records') }}">Attendance Records</a>
+            <a href="{{ url_for('reports') }}" class="active">Reports & Analytics</a>
+
+            <button type="button"
+                    class="sidebar-link-button"
+                    onclick="window.location.href='/admin_profile'">
+                Teacher Profile
+            </button>
+
+            <button type="button"
+                    class="sidebar-link-button"
+                    onclick="window.location.href='/settings'">
+                Settings
+            </button>
+        </nav>
+
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+
+    </aside>
+
+    <main class="main-content">
+
+        <h1>Reports & Analytics</h1>
+        <p>View attendance performance and student statistics.</p>
+
+        <!-- STATISTICS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <p>Total Students</p>
+                <h2>{{ total_students }}</h2>
+                <span>Registered students</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Total Attendance Records</p>
+                <h2>{{ total_records }}</h2>
+                <span>All recorded entries</span>
+            </div>
+
+            <div class="stat-card">
+                <p>Overall Attendance</p>
+                <h2>{{ overall_attendance }}%</h2>
+                <span>Present and late records</span>
+            </div>
+
+        </section>
+
+        <!-- ATTENDANCE CHARTS -->
+
+        <div class="charts-grid">
+
+            <div class="chart-card">
+                <h2>Monthly Attendance Trend</h2>
+                <canvas id="monthlyChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>Attendance Status Distribution</h2>
+                <canvas id="statusChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- INDIVIDUAL STUDENT REPORT -->
+
+        <div class="table-container">
+
+            <h2>Individual Student Attendance Report</h2>
+
+            <table class="student-table">
+
+                <thead>
+                    <tr>
+                        <th>Roll Number</th>
+                        <th>Student Name</th>
+                        <th>Total Classes</th>
+                        <th>Attended</th>
+                        <th>Absent</th>
+                        <th>Attendance %</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for student in student_reports %}
+
+                    <tr>
+                        <td>{{ student.roll_number }}</td>
+                        <td>{{ student.full_name }}</td>
+                        <td>{{ student.total_classes }}</td>
+                        <td>{{ student.attended or 0 }}</td>
+                        <td>{{ student.absent or 0 }}</td>
+
+                        <td>
+                            {% if student.total_classes > 0 %}
+                                {{ ((student.attended or 0) / student.total_classes * 100)|round(1) }}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="6">No student records found.</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Chart.js Library -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    // Monthly Attendance Trend
+
+    const monthlyLabels = {{ monthly_labels | tojson }};
+    const monthlyPercentages = {{ monthly_percentages | tojson }};
+
+    new Chart(document.getElementById("monthlyChart"), {
+        type: "line",
+
+        data: {
+            labels: monthlyLabels,
+
+            datasets: [{
+                label: "Attendance %",
+                data: monthlyPercentages,
+                borderColor: "#315b91",
+                backgroundColor: "rgba(49, 91, 145, 0.15)",
+                fill: true,
+                tension: 0.3,
+                pointRadius: 6,
+                pointHoverRadius: 9,
+                pointBackgroundColor: "#315b91"
+            }]
+        },
+
+        options: {
+            responsive: true,
+
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+
+                    ticks: {
+                        callback: function(value) {
+                            return value + "%";
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Attendance Status Distribution
+
+    const statusCounts = {{ status_counts | tojson }};
+
+    new Chart(document.getElementById("statusChart"), {
+        type: "doughnut",
+
+        data: {
+            labels: ["Present", "Absent", "Late"],
+
+            datasets: [{
+                data: [
+                    statusCounts.Present,
+                    statusCounts.Absent,
+                    statusCounts.Late
+                ],
+
+                backgroundColor: [
+                    "#2e9d70",
+                    "#e35d6a",
+                    "#e5a23b"
+                ],
+
+                borderWidth: 2
+            }]
+        },
+
+        options: {
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    position: "bottom"
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>
+```
