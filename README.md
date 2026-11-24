@@ -115,3 +115,12 @@ The AttendEase dashboard provides a central interface for accessing attendance-r
 - Provides navigation to system features.
 - Offers access to student and teacher functionality.
 - Organizes attendance information for convenient access.
+## Benefits of AttendEase
+
+AttendEase simplifies attendance management through a digital platform.
+
+- Reduces manual attendance record-keeping.
+- Makes attendance information easier to access.
+- Organizes records by student and academic subject.
+- Helps teachers manage attendance efficiently.
+- Allows students to review their attendance records.
