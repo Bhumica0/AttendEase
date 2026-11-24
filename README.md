@@ -124,3 +124,11 @@ AttendEase simplifies attendance management through a digital platform.
 - Organizes records by student and academic subject.
 - Helps teachers manage attendance efficiently.
 - Allows students to review their attendance records.
+## Security Considerations
+
+AttendEase uses role-based access to organize system functionality for teachers and students.
+
+- Users access features according to their assigned role.
+- Attendance records are stored in the application's database.
+- Login access helps protect attendance functionality.
+- Users should keep their login credentials confidential.
