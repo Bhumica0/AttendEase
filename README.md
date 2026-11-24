@@ -99,3 +99,19 @@ AttendEase helps users monitor attendance records and review attendance-related 
 - Track attendance by academic subject.
 - Review student attendance records.
 - Use dashboard summaries to monitor attendance.
+## Dashboard Overview
+
+The AttendEase dashboard provides a central interface for accessing attendance-related functions.
+
+- Displays attendance-related summaries.
+- Provides navigation to system features.
+- Offers access to student and teacher functionality.
+- Organizes attendance information for convenient access.
+## Dashboard Overview
+
+The AttendEase dashboard provides a central interface for accessing attendance-related functions.
+
+- Displays attendance-related summaries.
+- Provides navigation to system features.
+- Offers access to student and teacher functionality.
+- Organizes attendance information for convenient access.
