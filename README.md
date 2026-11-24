@@ -141,3 +141,9 @@ AttendEase is built using the following technologies:
 - **SQLite:** Database for storing attendance-related information.
 - **HTML:** Structure of application web pages.
 - **CSS:** Styling and layout of the user interface.
+## Limitations
+
+- Attendance records depend on users entering and saving data correctly.
+- The system requires an active application server to access its features.
+- The current database is SQLite, intended for a lightweight application setup.
+- The system does not currently provide automated biometric attendance verification.
