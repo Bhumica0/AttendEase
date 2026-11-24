@@ -147,3 +147,11 @@ AttendEase is built using the following technologies:
 - The system requires an active application server to access its features.
 - The current database is SQLite, intended for a lightweight application setup.
 - The system does not currently provide automated biometric attendance verification.
+## Prerequisites
+
+Before running AttendEase, ensure the following are installed:
+
+- Python 3.10 or newer.
+- pip (Python package installer).
+- A code editor such as Visual Studio Code.
+- Git for version control.
