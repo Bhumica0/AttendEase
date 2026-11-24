@@ -91,3 +91,11 @@ Teachers can use AttendEase to record and manage student attendance.
 - Mark attendance for students.
 - Save attendance records for tracking.
 - Review attendance information through the dashboard and reports.
+## Attendance Reports
+
+AttendEase helps users monitor attendance records and review attendance-related information.
+
+- View recorded attendance data.
+- Track attendance by academic subject.
+- Review student attendance records.
+- Use dashboard summaries to monitor attendance.
