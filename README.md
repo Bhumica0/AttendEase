@@ -132,3 +132,12 @@ AttendEase uses role-based access to organize system functionality for teachers 
 - Attendance records are stored in the application's database.
 - Login access helps protect attendance functionality.
 - Users should keep their login credentials confidential.
+## Technology Stack
+
+AttendEase is built using the following technologies:
+
+- **Python:** Application programming language.
+- **Flask:** Web framework for handling application routes and requests.
+- **SQLite:** Database for storing attendance-related information.
+- **HTML:** Structure of application web pages.
+- **CSS:** Styling and layout of the user interface.
