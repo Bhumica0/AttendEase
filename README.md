@@ -74,3 +74,11 @@ The project excludes virtual environments, Python cache files, local database fi
 - Advanced Data Structures and Algorithms
 - Mathematics for Computing
 - Programming for Artificial Intelligence
+## Login System
+
+AttendEase provides role-based access for users:
+
+- **Teacher/Admin:** Access the dashboard, manage students and subjects, mark attendance, and view attendance reports.
+- **Student:** Access the student dashboard and view personal attendance records.
+
+Users access the system through the login page, which directs them to the dashboard corresponding to their role.
