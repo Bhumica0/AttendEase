@@ -82,3 +82,12 @@ AttendEase provides role-based access for users:
 - **Student:** Access the student dashboard and view personal attendance records.
 
 Users access the system through the login page, which directs them to the dashboard corresponding to their role.
+## Attendance Management
+
+Teachers can use AttendEase to record and manage student attendance.
+
+- Select the relevant academic subject.
+- View the registered students.
+- Mark attendance for students.
+- Save attendance records for tracking.
+- Review attendance information through the dashboard and reports.
